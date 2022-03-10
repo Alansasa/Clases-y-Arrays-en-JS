@@ -29,33 +29,68 @@ sean numeros, las pocisiones sean texto, a esto se le llama
 Un array asociativo es un array cuyos índices no son numéricos sinó cadenas 
 de texto (claves). En JavaScript no existen realmente arrays asociativos pero 
 podemos simularlos creando objetos y accediendo a sus propiedades.*/
+/*en html no importa de donde me traiga los archivos, al final del
+dia los va a meter todos en el mismo lado, y tambien las clases 
+al igual que las funciones, JavaScript primero las lee, y luego las
+monta en memoria y luego ahi si empieza a ejecutar el codigo linea 
+por linea*/
+/*Hay un ciclo especial en JavaScript, y este ciclo solo va a operar
+por la cantidad de objetos que hay dentro de un array.
+for(var pakimanes in coleccion){
+    console.log(pakimanes);
+}, "in", itera sobre el indice, y en el caso de hacerle console.log, en la
+consola solo mostrara las pocisiones de cada variable del array.
+
+for(var pakimanes of coleccion){
+    console.log(pakimanes);
+} , "of", itera sobre los objetos, y en este caso, si se le hace 
+console.log, en la consola mostrara la instancia u objeto.
+
+El "in" y el "of", pueden servir para recorrer un objeto por dentro,
+y en ocasiones para recorrer arrays que no conocemos.
+
+En arrays asociativos funcionaria el "in", para mostrar las claves, 
+pero el "of" no, porque como tal no se ha creado un indice (pocisiones)
+osea "0, 1, 2", entonces no se le da un indice a JavaScript
+para que lo pueda recorrer.
+
+var urlImagenes = [];
+urlImagenes ["Cauchin"] = "vaca.png";
+urlImagenes ["Pokacho"] = "pollo.png";
+urlImagenes ["Tocinauro"] = "cerdo.png";
+
+for(var x in urlImagenes){
+    console.log(x);
+//EN LA CONSOLA MOSTRARIA LAS CLAVES ("Cauchin", "Pokacho", "Tocinauro")
+}
+for(var x of urlImagenes){
+    console.log(x);
+// NO MOSTRARIA NADA EN LA CONSOLA, YA QUE 
+LAS CLAVES ("Cauchin", "Pokacho", "Tocinauro"), NO SON "INDICES" Y POR
+ENDE JAVASCRIPT NO LOS PUEDE RECORRER;
+}
+
+El "in" se lo puedes aplicar a un objeto de un array directamente,
+esto para que nos muestre los atributos del mismo.
+for(var x in coleccion[0]){
+    console.log(x);
+//MOSTRARIA ("IMAGEN", "NAME", "LIFE" Y "ATTACK"), QUE SON LOS ATRIBUTOS 
+DEL OBJETO
+}
+*/
+
 
 var urlImagenes = [];
 urlImagenes ["Cauchin"] = "vaca.png";
 urlImagenes ["Pokacho"] = "pollo.png";
 urlImagenes ["Tocinauro"] = "cerdo.png";
  
-class Pakiman{
-    constructor(nombrePakiman, vida, ataque){
-        this.imagen = new Image ();
-        this.name = nombrePakiman;
-        this.life = vida;
-        this.attack = ataque;
-        this.imagen.src = urlImagenes [this.name];
-    }
-    insertarImagen(){
-        document.body.appendChild(this.imagen);
-        document.write("<br /> <strong id = nombrePakiman>" + this.name + "</strong> <br />");
-        document.write("Vida: " + this.life + " hp <br />");
-        document.write("Ataque: " + this.attack + "<hr />") 
-    }
+var coleccion = [];
+coleccion.push(new Pakiman("Cauchin", 100, 30));
+coleccion.push(new Pakiman("Pokacho", 80, 50));
+coleccion.push(new Pakiman("Tocinauro", 120, 40))
 
+for (var pakimanes of coleccion){
+   pakimanes.insertarImagen();
 }
 
-var cauchin = new Pakiman("Cauchin", 100, 30);
-var pokacho = new Pakiman("Pokacho", 80, 50);
-var tocinauro = new Pakiman("Tocinauro", 120, 40);
-
-cauchin.insertarImagen();
-pokacho.insertarImagen();
-tocinauro.insertarImagen();
